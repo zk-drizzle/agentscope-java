@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="article:modified_time" content="2026-01-21T02:48:07+00:00" /><link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Coding with AI" href="ai-coding.html"><link rel="prev" title="AG-UI Protocol Integration" href="agui.html">
+    <meta property="article:modified_time" content="2026-01-21T02:57:24+00:00" /><link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Coding with AI" href="ai-coding.html"><link rel="prev" title="AG-UI Protocol Integration" href="agui.html">
         <link rel="canonical" href="https://java.agentscope.io/en/task/a2a.html">
         <link rel="prefetch" href="../../_static/logo.svg" as="image">
 
@@ -868,7 +868,7 @@
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Build a DashScopeChatModel to invoke the LLM service.</span>
 <span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">DashScopeChatModel</span><span class="w"> </span><span class="nf">dashScopeChatModel</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">dashScopeApiKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">StringUtils</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">(</span><span class="n">dashScopeApiKey</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span>
 <span class="w">            </span><span class="s">&quot;DashScope API key is empty. Please set the environment variable `AI_DASHSCOPE_API_KEY`.&quot;</span>
 <span class="w">        </span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
