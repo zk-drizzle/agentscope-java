@@ -155,13 +155,13 @@ For most cases, all-in-one is enough. Switch to core + extensions when you need 
 <dependency>
     <groupId>io.agentscope</groupId>
     <artifactId>agentscope</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 
 **Gradle:**
 ```gradle
-implementation 'io.agentscope:agentscope:1.0.6'
+implementation 'io.agentscope:agentscope:1.0.7'
 ```
 
 ### Included Dependencies
@@ -185,6 +185,7 @@ When using other models or features, add the corresponding dependencies:
 | **ReME Long-term Memory** | [OkHttp](https://central.sonatype.com/artifact/com.squareup.okhttp3/okhttp)              | `com.squareup.okhttp3:okhttp`    |
 | **Bailian RAG**           | [Bailian SDK](https://central.sonatype.com/artifact/com.aliyun/bailian20231229)          | `com.aliyun:bailian20231229`     |
 | **Qdrant RAG**            | [Qdrant Client](https://central.sonatype.com/artifact/io.qdrant/client)                  | `io.qdrant:client`               |
+| **PgVector RAG**          | [PostgreSQL Driver](https://central.sonatype.com/artifact/org.postgresql/postgresql) + [pgvector](https://central.sonatype.com/artifact/com.pgvector/pgvector) | `org.postgresql:postgresql` + `com.pgvector:pgvector` |
 | **Dify RAG**              | [OkHttp](https://central.sonatype.com/artifact/com.squareup.okhttp3/okhttp)              | `com.squareup.okhttp3:okhttp`    |
 | **RAGFlow RAG**           | [OkHttp](https://central.sonatype.com/artifact/com.squareup.okhttp3/okhttp)              | `com.squareup.okhttp3:okhttp`    |
 | **HayStack RAG**          | [OkHttp](https://central.sonatype.com/artifact/com.squareup.okhttp3/okhttp)              | `com.squareup.okhttp3:okhttp`    |
@@ -265,13 +266,13 @@ For fine-grained dependency control, use `agentscope-core` with extension module
 <dependency>
     <groupId>io.agentscope</groupId>
     <artifactId>agentscope-core</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 
 **Gradle:**
 ```gradle
-implementation 'io.agentscope:agentscope-core:1.0.6'
+implementation 'io.agentscope:agentscope-core:1.0.7'
 ```
 
 ### Extension Modules
@@ -289,7 +290,7 @@ implementation 'io.agentscope:agentscope-core:1.0.6'
 | Module | Feature | Maven Coordinates |
 |--------|---------|-------------------|
 | [agentscope-extensions-rag-bailian](https://central.sonatype.com/artifact/io.agentscope/agentscope-extensions-rag-bailian) | Bailian RAG | `io.agentscope:agentscope-extensions-rag-bailian` |
-| [agentscope-extensions-rag-simple](https://central.sonatype.com/artifact/io.agentscope/agentscope-extensions-rag-simple) | Qdrant RAG | `io.agentscope:agentscope-extensions-rag-simple` |
+| [agentscope-extensions-rag-simple](https://central.sonatype.com/artifact/io.agentscope/agentscope-extensions-rag-simple) | Simple RAG (Qdrant, Milvus, PgVector, InMemory) | `io.agentscope:agentscope-extensions-rag-simple` |
 | [agentscope-extensions-rag-dify](https://central.sonatype.com/artifact/io.agentscope/agentscope-extensions-rag-dify) | Dify RAG | `io.agentscope:agentscope-extensions-rag-dify` |
 | [agentscope-extensions-rag-ragflow](https://central.sonatype.com/artifact/io.agentscope/agentscope-extensions-rag-ragflow) | RAGFlow RAG | `io.agentscope:agentscope-extensions-rag-ragflow` |
 | [agentscope-extensions-rag-haystack](https://central.sonatype.com/artifact/io.agentscope/agentscope-extensions-rag-haystack) | HayStack RAG | `io.agentscope:agentscope-extensions-rag-haystack` |
@@ -331,7 +332,7 @@ Extension modules automatically include their required third-party dependencies.
 <dependency>
     <groupId>io.agentscope</groupId>
     <artifactId>agentscope-extensions-mem0</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 
@@ -343,7 +344,7 @@ Extension modules automatically include their required third-party dependencies.
 <dependency>
     <groupId>io.agentscope</groupId>
     <artifactId>agentscope-spring-boot-starter</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 
@@ -360,7 +361,7 @@ Additional starters:
 <dependency>
     <groupId>io.agentscope</groupId>
     <artifactId>agentscope-quarkus-extension</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 
@@ -370,7 +371,7 @@ Additional starters:
 <dependency>
     <groupId>io.agentscope</groupId>
     <artifactId>agentscope-micronaut-extension</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 
@@ -924,6 +925,7 @@ Msg userInput = user.call(null).block();
 ```
 
 
+model.md
 # Model
 
 This guide introduces the LLM models supported by AgentScope Java and how to configure them.
@@ -936,6 +938,7 @@ This guide introduces the LLM models supported by AgentScope Java and how to con
 | OpenAI     | `OpenAIChatModel`       | ✅        | ✅    | ✅     |           |
 | Anthropic  | `AnthropicChatModel`    | ✅        | ✅    | ✅     | ✅        |
 | Gemini     | `GeminiChatModel`       | ✅        | ✅    | ✅     | ✅        |
+| Ollama     | `OllamaChatModel`       | ✅        | ✅    | ✅     | ✅        |
 
 > **Note**:
 > - `OpenAIChatModel` is compatible with OpenAI API specification, works with vLLM, DeepSeek, etc.
@@ -984,6 +987,17 @@ DashScopeChatModel model = DashScopeChatModel.builder()
                 .thinkingBudget(5000)  // Token budget for thinking
                 .build())
         .build();
+
+OllamaChatModel model =
+        OllamaChatModel.builder()
+                .modelName("qwen3-max")
+                .baseUrl("http://localhost:11434")
+                .defaultOptions(OllamaOptions.builder()
+                        .thinkOption(ThinkOption.ThinkBoolean.ENABLED)
+                        .temperature(0.8)
+                        .build())
+                .build();
+
 ```
 
 ## OpenAI
@@ -1075,6 +1089,107 @@ GeminiChatModel model = GeminiChatModel.builder()
 | `credentials` | GCP credentials (Vertex AI) |
 | `streamEnabled` | Enable streaming, default `true` |
 
+## Ollama
+
+Self-hosted open-source LLM platform supporting various models.
+
+```java
+OllamaChatModel model = OllamaChatModel.builder()
+        .modelName("qwen3-max")
+        .baseUrl("http://localhost:11434")  // Default
+        .build();
+```
+
+### Configuration
+
+| Option | Description                                                         |
+|--------|---------------------------------------------------------------------|
+| `modelName` | Model name, e.g., `qwen3-max`,`llama3.2`, `mistral`, `phi3`              |
+| `baseUrl` | Ollama server endpoint (optional, default `http://localhost:11434`) |
+| `defaultOptions` | Default generation options                                          |
+| `formatter` | Message formatter (optional)                                        |
+| `httpTransport` | HTTP transport configuration (optional)                             |
+
+### Advanced Configuration
+
+For advanced model loading and generation parameters:
+
+```java
+OllamaOptions options = OllamaOptions.builder()
+        .numCtx(4096)           // Context window size
+        .temperature(0.7)       // Generation randomness
+        .topK(40)               // Top-K sampling
+        .topP(0.9)              // Nucleus sampling
+        .repeatPenalty(1.1)     // Repetition penalty
+        .build();
+
+OllamaChatModel model = OllamaChatModel.builder()
+        .modelName("qwen3-max")
+        .baseUrl("http://localhost:11434")
+        .defaultOptions(options)
+        .build();
+```
+
+### GenerateOptions Support
+
+Ollama also supports `GenerateOptions` for standard configuration:
+
+```java
+GenerateOptions options = GenerateOptions.builder()
+        .temperature(0.7)           // Maps to Ollama's temperature
+        .topP(0.9)                  // Maps to Ollama's top_p
+        .topK(40)                   // Maps to Ollama's top_k
+        .maxTokens(2000)            // Maps to Ollama's num_predict
+        .seed(42L)                  // Maps to Ollama's seed
+        .frequencyPenalty(0.5)      // Maps to Ollama's frequency_penalty
+        .presencePenalty(0.5)       // Maps to Ollama's presence_penalty
+        .additionalBodyParam(OllamaOptions.ParamKey.NUM_CTX.getKey(), 4096)      // Context window size
+        .additionalBodyParam(OllamaOptions.ParamKey.NUM_GPU.getKey(), -1)        // Offload all layers to GPU
+        .additionalBodyParam(OllamaOptions.ParamKey.REPEAT_PENALTY.getKey(), 1.1) // Repetition penalty
+        .additionalBodyParam(OllamaOptions.ParamKey.MAIN_GPU.getKey(), 0)        // Main GPU index
+        .additionalBodyParam(OllamaOptions.ParamKey.LOW_VRAM.getKey(), false)    // Low VRAM mode
+        .additionalBodyParam(OllamaOptions.ParamKey.F16_KV.getKey(), true)       // 16-bit KV cache
+        .additionalBodyParam(OllamaOptions.ParamKey.NUM_THREAD.getKey(), 8)      // Number of CPU threads
+        .build();
+
+OllamaChatModel model = OllamaChatModel.builder()
+        .modelName("qwen3-max")
+        .baseUrl("http://localhost:11434")
+        .defaultOptions(OllamaOptions.fromGenerateOptions(options))  // Will be converted to OllamaOptions internally
+        .build();
+```
+
+### Available Parameters
+
+Ollama supports over 40 parameters for fine-tuning:
+
+#### Model Loading Parameters
+- `numCtx`: Context window size (default: 2048)
+- `numBatch`: Batch size for prompt processing (default: 512)
+- `numGPU`: Number of layers to offload to GPU (-1 for all)
+- `lowVRAM`: Enable low VRAM mode for limited GPU memory
+- `useMMap`: Use memory mapping for model loading
+- `useMLock`: Lock model in memory to prevent swapping
+
+#### Generation Parameters
+- `temperature`: Generation randomness (0.0-2.0)
+- `topK`: Top-K sampling (standard: 40)
+- `topP`: Nucleus sampling (standard: 0.9)
+- `minP`: Minimum probability threshold (default: 0.0)
+- `numPredict`: Max tokens to generate (-1 for infinite)
+- `repeatPenalty`: Penalty for repetitions (default: 1.1)
+- `presencePenalty`: Penalty based on token presence
+- `frequencyPenalty`: Penalty based on token frequency
+- `seed`: Random seed for reproducible results
+- `stop`: Strings that stop generation immediately
+
+#### Sampling Strategies
+- `mirostat`: Mirostat sampling (0=disabled, 1=Mirostat v1, 2=Mirostat v2)
+- `mirostatTau`: Target entropy for Mirostat (default: 5.0)
+- `mirostatEta`: Learning rate for Mirostat (default: 0.1)
+- `tfsZ`: Tail-free sampling (default: 1.0 disables)
+- `typicalP`: Typical probability sampling (default: 1.0)
+
 ## Generation Options
 
 Configure generation parameters with `GenerateOptions`:
@@ -1093,6 +1208,12 @@ DashScopeChatModel model = DashScopeChatModel.builder()
         .apiKey(System.getenv("DASHSCOPE_API_KEY"))
         .modelName("qwen3-max")
         .defaultOptions(options)
+        .build();
+
+OllamaChatModel model = OllamaChatModel.builder()
+        .modelName("qwen3-max")
+        .baseUrl("http://localhost:11434")
+        .defaultOptions(OllamaOptions.fromGenerateOptions(options))
         .build();
 ```
 
@@ -1155,6 +1276,7 @@ Formatter converts AgentScope's unified message format to each LLM provider's AP
 | OpenAI | `OpenAIChatFormatter` | `OpenAIMultiAgentFormatter` |
 | Anthropic | `AnthropicChatFormatter` | `AnthropicMultiAgentFormatter` |
 | Gemini | `GeminiChatFormatter` | `GeminiMultiAgentFormatter` |
+| Ollama | `OllamaChatFormatter` | `OllamaMultiAgentFormatter` |
 
 ### Default Behavior
 
@@ -1194,6 +1316,12 @@ GeminiChatModel model = GeminiChatModel.builder()
         .apiKey(System.getenv("GEMINI_API_KEY"))
         .formatter(new GeminiMultiAgentFormatter())
         .build();
+
+// Ollama multi-agent
+OllamaChatModel model = OllamaChatModel.builder()
+        .modelName("qwen3-max")
+        .formatter(new OllamaMultiAgentFormatter())
+        .build();
 ```
 
 ### Custom History Prompt
@@ -1218,7 +1346,6 @@ DashScopeChatModel model = DashScopeChatModel.builder()
 | Pipeline sequential execution | `MultiAgentFormatter` |
 | MsgHub group chat | `MultiAgentFormatter` |
 | Multi-agent debate | `MultiAgentFormatter` |
-
 
 # Tool
 
@@ -1931,7 +2058,7 @@ Agent Skills are modular skill packages that extend agent capabilities. Each Ski
 
 Adopts **three-stage on-demand loading** to optimize context: Initially loads only metadata (~100 tokens/Skill) → AI loads complete instructions when needed (<5k tokens) → On-demand access to resource files. Tools are also progressively disclosed, activated only when the Skill is in use.
 
-**Workflow:** User Query → AI Identifies Relevant Skill → Calls Tools to Load Content and Activate Bound Tools → On-Demand Resource Access → Task Completion
+**Workflow:** User Query → AI Identifies Relevant Skill → Calls `load_skill_through_path` Tool to Load Content and Activate Bound Tools → On-Demand Resource Access → Task Completion
 
 ### Adaptive Design
 
@@ -2051,7 +2178,7 @@ AgentSkill skill = new AgentSkill(
 Toolkit toolkit = new Toolkit();
 
 SkillBox skillBox = new SkillBox(toolkit);
-skillBox.registerAgentSkill(skill1);
+skillBox.registerSkill(skill1);
 
 ReActAgent agent = ReActAgent.builder()
         .name("DataAnalyst")
@@ -2069,7 +2196,7 @@ ReActAgent agent = ReActAgent.builder()
 ```java
 SkillBox skillBox = new SkillBox();
 
-skillBox.registerAgentSkill(dataSkill);
+skillBox.registerSkill(dataSkill);
 
 ReActAgent agent = ReActAgent.builder()
     .name("Assistant")
@@ -2687,7 +2814,7 @@ public class CustomReader implements Reader {
 - **Bailian Knowledge Base Example**: [BailianRAGExample.java](https://github.com/agentscope-ai/agentscope-java/blob/main/agentscope-examples/advanced/src/main/java/io/agentscope/examples/advanced/BailianRAGExample.java)
 - **Dify Knowledge Base Example**: [DifyRAGExample.java](https://github.com/agentscope-ai/agentscope-java/blob/main/agentscope-examples/quickstart/src/main/java/io/agentscope/examples/quickstart/DifyRAGExample.java)
 - **RAGFlow Knowledge Base Example**: [RAGFlowRAGExample.java](https://github.com/agentscope-ai/agentscope-java/blob/main/agentscope-examples/quickstart/src/main/java/io/agentscope/examples/quickstart/RAGFlowRAGExample.java)
-
+- **PgVector Knowledge Base Example**: [PgVectorRAGExample.java](https://github.com/agentscope-ai/agentscope-java/blob/main/agentscope-examples/quickstart/src/main/java/io/agentscope/examples/quickstart/PgVectorRAGExample.java)
 
 # Hook
 
